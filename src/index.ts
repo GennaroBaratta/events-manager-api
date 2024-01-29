@@ -1,15 +1,7 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+// Ad esempio, in un file di configurazione o all'avvio dell'app
 
-dotenv.config();
+import { EventiService } from "./application/services/EventiService";
+import { MongoEventiRepository } from "./infrastructure/db/MongoEventiRepository";
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("hahah Express + TypeScript Server");
-});
-
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+export const eventiRepo = new MongoEventiRepository();
+export const eventiService = new EventiService(eventiRepo);
